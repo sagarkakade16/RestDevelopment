@@ -68,11 +68,8 @@
 			<artifactId>jakarta.servlet-api</artifactId>
 			<version>4.0.2</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>jakarta.ws.rs</groupId>
-			<artifactId>jakarta.ws.rs-api</artifactId>
-			<version>2.1.5</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>jakarta.ws.rs</groupId> <artifactId>jakarta.ws.rs-api</artifactId> 
+			<version>2.1.5</version> </dependency> -->
 		<dependency>
 			<groupId>jakarta.ws.rs</groupId>
 			<artifactId>jakarta.ws.rs-api</artifactId>
@@ -159,16 +156,65 @@
 			<version>4.8.2</version>
 			<scope>test</scope>
 		</dependency>
-		 <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>jsr311-api</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>1.17</version>
-        </dependency>
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>jsr311-api</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.17</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.maven/maven-archiver -->
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-archiver</artifactId>
+			<version>3.4.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.codehaus.cargo/cargo-core-api-generic -->
+		<dependency>
+			<groupId>org.codehaus.cargo</groupId>
+			<artifactId>cargo-core-api-generic</artifactId>
+			<version>1.7.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.codehaus.cargo/cargo-documentation -->
+		<dependency>
+			<groupId>org.codehaus.cargo</groupId>
+			<artifactId>cargo-documentation</artifactId>
+			<version>1.7.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.codehaus.cargo/cargo-daemon-client -->
+		<dependency>
+			<groupId>org.codehaus.cargo</groupId>
+			<artifactId>cargo-daemon-client</artifactId>
+			<version>1.7.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.maven/maven-project -->
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-project</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.maven/maven-settings -->
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-settings</artifactId>
+			<version>3.6.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.codehaus.plexus/plexus-utils -->
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-utils</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.maven/maven-plugin-api -->
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+			<version>3.6.0</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -190,8 +236,46 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+
+
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.7.4-SNAPSHOT</version>
+				<configuration>
+					<container>
+						<containerId>jboss7x</containerId>
+						<type>remote</type>
+					</container>
+					<configuration>
+						<type>runtime</type>
+						<properties>
+							<cargo.hostname>production27</cargo.hostname>
+							<cargo.jboss.management-native.port>19999</cargo.jboss.management-native.port>
+						</properties>
+					</configuration>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.jboss.as</groupId>
+						<artifactId>jboss-as-controller-client</artifactId>
+						<version>7.0.2.Final</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+
+
+			<!-- <plugin> <groupId>org.codehaus.cargo</groupId> <artifactId>cargo-maven2-plugin</artifactId> 
+				<version>1.2.0</version> <configuration> <container> <containerId>jboss71x</containerId> 
+				<home>C:\jboss\jboss-eap-7.2\jboss-eap-7.2</home> <timeout>600000</timeout> 
+				<append>false</append> </container> <configuration> <type>existing</type> 
+				<home>C:\jboss\jboss-eap-7.2\jboss-eap-7.2t</home> <properties> <cargo.servlet.port>8090</cargo.servlet.port> 
+				<cargo.jboss.configuration>default</cargo.jboss.configuration> <cargo.hostname>localhost</cargo.hostname> 
+				<cargo.rmi.port>1099</cargo.rmi.port> </properties> </configuration> </configuration> 
+				</plugin> -->
 		</plugins>
 	</build>
-	
-	
+
+
 </project>
